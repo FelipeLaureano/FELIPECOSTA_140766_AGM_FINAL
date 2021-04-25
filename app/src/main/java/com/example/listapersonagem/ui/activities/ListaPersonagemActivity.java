@@ -1,16 +1,16 @@
 package com.example.listapersonagem.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.listapersonagem.R;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.example.listapersonagem.dao.PersonagemDAO;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ListaPersonagemActivity extends AppCompatActivity {
 
@@ -19,10 +19,22 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_personagem);
 
-        List<String> personagem = new ArrayList<>(Arrays.asList("Alex", "Ken", "Ryu"));
+        PersonagemDAO dao = new PersonagemDAO();
 
-        ListView listaDePersonagens = findViewById(R.id.activity_main_lista_personagem);
-        listaDePersonagens.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, personagem));
+        setTitle("Lista de Personagens");
+
+        FloatingActionButton botaoNovoPersonagem = findViewById(R.id.fab_novo_personagem);//criação de vinculo com o botão
+        botaoNovoPersonagem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ListaPersonagemActivity.this, FormularioPersonagemActivity.class));//chamar a nova tela
+            }
+        });
+
+        //List<String> personagem = new ArrayList<>(Arrays.asList("Alex", "Ken", "Ryu"));
+
+        ListView listaDePersonagens = findViewById(R.id.lista_personagem);
+        listaDePersonagens.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dao.todos()));
 
 
 

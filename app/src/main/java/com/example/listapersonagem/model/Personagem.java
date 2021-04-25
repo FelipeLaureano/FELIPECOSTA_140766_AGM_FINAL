@@ -15,8 +15,13 @@ public class Personagem { //classe para persistencia de dados
         this.nascimento = nascimento;
     }
 
+    @Override
+    public String toString() {
+        return nome; //aparecer apensa o nome quando passar a informação
+    }
+
     //GETS
-    public String getNome() {
+   /* public String getNome() {
         return nome;
     }
 
@@ -26,5 +31,5 @@ public class Personagem { //classe para persistencia de dados
 
     public String getNascimento() {
         return nascimento;
-    }
+    }*/
 }
