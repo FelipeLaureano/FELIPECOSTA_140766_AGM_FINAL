@@ -13,11 +13,15 @@ public class Personagem implements Serializable { //classe para persistencia de 
     private int id = 0;
 
     public Personagem(String nome, String altura, String nascimento) {
-
+        //setando
         this.nome = nome;
         this.altura = altura;
         this.nascimento = nascimento;
     }
+
+    public Personagem(){
+
+    };
 
 
     //GETS SETS (alt + Insert)

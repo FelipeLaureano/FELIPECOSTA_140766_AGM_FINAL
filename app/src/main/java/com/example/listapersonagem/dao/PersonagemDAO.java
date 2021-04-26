@@ -5,7 +5,7 @@ import com.example.listapersonagem.model.Personagem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonagemDAO {
+public class PersonagemDAO { //classe para salvar dentro da aplicação - base de dados
 
     private final static List<Personagem> personagens = new ArrayList<>();
     private static int contadorDeId = 1;
@@ -32,7 +32,7 @@ public class PersonagemDAO {
         }
     }
 
-    public List<Personagem> todos() {
+    public List<Personagem> todos() { //método para buscar todas as listagens
         return new ArrayList<>(personagens);
     }
 }

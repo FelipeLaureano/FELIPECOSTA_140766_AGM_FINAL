@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ListaPersonagemActivity extends AppCompatActivity {
 
-    private final PersonagemDAO dao = new PersonagemDAO();
+    private final PersonagemDAO dao = new PersonagemDAO();//variável global
 
     @Override //sobrescreve
     protected void onCreate(@NonNull Bundle savedInstanceState){
@@ -40,7 +40,6 @@ public class ListaPersonagemActivity extends AppCompatActivity {
 
         //List<String> personagem = new ArrayList<>(Arrays.asList("Alex", "Ken", "Ryu"));
 
-
         //FAZER MANUALMENTE:
         /*TextView primeiroPersonagem = findViewById(R.id.textView);
         TextView segundoPersonagem = findViewById(R.id.textView2);
@@ -52,7 +51,7 @@ public class ListaPersonagemActivity extends AppCompatActivity {
 
     }
 
-    //dados nao serão apagados quando dar voltar
+    //método para que dados nao sejam apagados quando dar voltar(back)
     @Override
     protected void onResume() {
         super.onResume();
