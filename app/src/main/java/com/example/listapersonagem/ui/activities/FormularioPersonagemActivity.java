@@ -2,15 +2,20 @@ package com.example.listapersonagem.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.listapersonagem.R;
 import com.example.listapersonagem.dao.PersonagemDAO;
 import com.example.listapersonagem.model.Personagem;
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 import static com.example.listapersonagem.ui.activities.ConstantesActivities.CHAVE_PERSONAGEM;
 
@@ -24,6 +29,21 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
     private EditText campoNascimento;
     private final PersonagemDAO dao = new PersonagemDAO(); //criaçao da variavel com classe PersonagemDAO
     private Personagem personagem;
+
+    @Override //criado para icone aparecer
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_formulario_personagem_menu_salvar,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override //criado para ação ser executada
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if(itemId == R.id.activity_formulario_personagem_menu_salvar){
+            finalizaFormulario();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +104,18 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
     }
 
     private void inicializacaoCampos() {
-        campoNome = findViewById(R.id.edittext_nome); //vincular ao campo
-        campoAltura = findViewById(R.id.edittext_altura); //vincular ao campo
-        campoNascimento = findViewById(R.id.edittext_nascimento); //vincular ao campo
+        campoNome = findViewById(R.id.edittext_nome); //vincular ao campo nome
+        campoAltura = findViewById(R.id.edittext_altura); //vincular ao campo altura
+        campoNascimento = findViewById(R.id.edittext_nascimento); //vincular ao campo nascimento
+
+        SimpleMaskFormatter smfAltura = new SimpleMaskFormatter("N,NN");//variaveis de mascara para altura
+        MaskTextWatcher mtwAltura = new MaskTextWatcher(campoAltura, smfAltura);
+        campoAltura.addTextChangedListener(mtwAltura);
+
+        SimpleMaskFormatter smfNascimento = new SimpleMaskFormatter("NN/NN/NNNN");//variaveis de mascara para nascimento
+        MaskTextWatcher mtwNascimento = new MaskTextWatcher(campoNascimento, smfNascimento);
+        campoNascimento.addTextChangedListener(mtwNascimento);
+
     }
 
     private void preenchePersonagem() {

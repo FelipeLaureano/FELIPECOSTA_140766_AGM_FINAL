@@ -1,42 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.activities.FormularioPersonagemActivity">
 
-  <EditText
-      android:id="@+id/edittext_nome"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:ems="10"
-      android:layout_margin="10dp"
-      android:inputType="textPersonName"
-      android:hint="Nome" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-  <EditText
-      android:id="@+id/edittext_altura"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:ems="10"
-      android:layout_margin="10dp"
-      android:inputType="numberDecimal"
-      android:hint="Altura" />
+        <EditText
+            android:id="@+id/edittext_nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="Nome"
+            android:inputType="textPersonName" />
 
-  <EditText
-      android:id="@+id/edittext_nascimento"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:ems="10"
-      android:inputType="date"
-      android:layout_margin="10dp"
-      android:hint="Nascimento"/>
+        <EditText
+            android:id="@+id/edittext_altura"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="Altura"
+            android:inputType="numberDecimal" />
 
-  <Button
-      android:id="@+id/button_salvar"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_margin="10dp"
-      android:text="SALVAR" />
-</LinearLayout>
+        <EditText
+            android:id="@+id/edittext_nascimento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="Nascimento"
+            android:inputType="date" />
+
+        <Button
+            android:id="@+id/button_salvar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="SALVAR"
+            android:visibility="gone"/>
+    </LinearLayout>
+</ScrollView>
