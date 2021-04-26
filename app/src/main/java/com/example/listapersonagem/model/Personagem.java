@@ -19,10 +19,9 @@ public class Personagem implements Serializable { //classe para persistencia de 
         this.nascimento = nascimento;
     }
 
-    public Personagem(){
+    public Personagem() {
 
-    };
-
+    }
 
     //GETS SETS (alt + Insert)
     public String getNome() {
@@ -48,19 +47,22 @@ public class Personagem implements Serializable { //classe para persistencia de 
     public void setNascimento(String nascimento) {
         this.nascimento = nascimento;
     }
+
     @NonNull
     @Override
     public String toString() {
         return nome; //aparecer apenas o nome quando passar a informação
     }
 
-
-    public void setId(int id){
+    public void setId(int id) {
         this.id = id;
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
+    public boolean IdValido() {
+        return id > 0;
+    }
 }

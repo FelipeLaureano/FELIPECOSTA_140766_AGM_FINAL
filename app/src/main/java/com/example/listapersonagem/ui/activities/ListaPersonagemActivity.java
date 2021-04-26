@@ -17,26 +17,22 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import static com.example.listapersonagem.ui.activities.ConstantesActivities.CHAVE_PERSONAGEM;
+
 public class ListaPersonagemActivity extends AppCompatActivity {
 
+    public static final String TITULO_APPBAR = "Lista de Personagens";
     private final PersonagemDAO dao = new PersonagemDAO();//variável global
 
     @Override //sobrescreve
-    protected void onCreate(@NonNull Bundle savedInstanceState){
+    protected void onCreate(@NonNull Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_personagem);
-        setTitle("Lista de Personagens");
+        setTitle(TITULO_APPBAR);//(ctrl + alt + c) - levar alteraçãp do nome escrito para inicio do codigo
+        configuraFabNovoPersonagem();//refatoração - criando novo método (ctrl + alt + m)
 
-        dao.salva(new Personagem("Ken","1,80","02041979"));
-        dao.salva(new Personagem("Hyu","1,80","02041979"));
-
-        FloatingActionButton botaoNovoPersonagem = findViewById(R.id.fab_novo_personagem);//criação de vinculo com o botão
-        botaoNovoPersonagem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ListaPersonagemActivity.this, FormularioPersonagemActivity.class));//chamar a nova tela
-            }
-        });
+        //dao.salva(new Personagem("Ken","1,80","02041979"));//texto fixo para teste
+        //dao.salva(new Personagem("Hyu","1,80","02041979"));//texto fixo para teste
 
         //List<String> personagem = new ArrayList<>(Arrays.asList("Alex", "Ken", "Ryu"));
 
@@ -48,27 +44,54 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         primeiroPersonagem.setText(personagem.get(0));
         segundoPersonagem.setText(personagem.get(1));
         terceiroPersonagem.setText(personagem.get(2));*/
+    }
 
+    private void configuraFabNovoPersonagem() {
+        FloatingActionButton botaoNovoPersonagem = findViewById(R.id.fab_novo_personagem);//criação de vinculo com o botão
+        botaoNovoPersonagem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abreFormularioSalva();//refatoração
+            }
+        });
+    }
+
+    private void abreFormularioSalva() {
+        startActivity(new Intent(ListaPersonagemActivity.this, FormularioPersonagemActivity.class));//chamar a nova tela
     }
 
     //método para que dados nao sejam apagados quando dar voltar(back)
     @Override
     protected void onResume() {
         super.onResume();
+        configuraLlista(); //refatoração (ctrl + alt + m)
+    }
 
-
+    private void configuraLlista() {
         ListView listaDePersonagens = findViewById(R.id.lista_personagem);
-        List<Personagem> personagens = dao.todos();
-        listaDePersonagens.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, personagens));
+        final List<Personagem> personagens = dao.todos();
+        listaDePersonagens(listaDePersonagens, personagens); //refatoração
+        configuraItemPorClique(listaDePersonagens); //refatoração
+    }
+
+    private void configuraItemPorClique(ListView listaDePersonagens) {
         listaDePersonagens.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
-                Personagem personagemEscolhido = personagens.get(posicao);
+                Personagem personagemEscolhido = (Personagem) adapterView.getItemAtPosition(posicao);
                 //Log.i( tag: "personagem", msg: "" + personagemEscolhido); //Vizualizar no LogCat
-                Intent vaiParaFormulario = new Intent(ListaPersonagemActivity.this, FormularioPersonagemActivity.class);
-                vaiParaFormulario.putExtra("personagem", personagemEscolhido);
-                startActivity(vaiParaFormulario);
+                abreFormularioModoEditar(personagemEscolhido);//refatoração
             }
         });
+    }
+
+    private void abreFormularioModoEditar(Personagem personagem) {
+        Intent vaiParaFormulario = new Intent(this, FormularioPersonagemActivity.class);
+        vaiParaFormulario.putExtra(CHAVE_PERSONAGEM, personagem);
+        startActivity(vaiParaFormulario);
+    }
+
+    private void listaDePersonagens(ListView listaDePersonagens, List<Personagem> personagens) {
+        listaDePersonagens.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, personagens));
     }
 }
