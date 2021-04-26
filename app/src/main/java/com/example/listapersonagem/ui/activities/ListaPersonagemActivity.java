@@ -1,5 +1,7 @@
 package com.example.listapersonagem.ui.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -82,15 +84,36 @@ public class ListaPersonagemActivity extends AppCompatActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        menu.add("Remover");
+        //menu.add("Remover");//fazer manualmente
+        //menu.add("Teste");//fazer manualmente
+        getMenuInflater().inflate(R.menu.activity_lista_personagens_menu, menu);
     }
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();//pegar o menu
-        Personagem personagemEscolhido = adapter.getItem(menuInfo.position);
-        remove(personagemEscolhido);
+        //CharSequence tituloDoMenu = item.getTitle();//pegar por titulo
+        configuraMenu(item);
         return super.onContextItemSelected(item);
+    }
+
+    private void configuraMenu(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if(itemId == R.id.activity_lista_personagem_menu_remover) {
+
+            new AlertDialog.Builder(this)//alerta para saber se quer mesmo apagar
+                    .setTitle("Removendo Personagem")
+                    .setMessage("Tem certeza que deseja remover?")
+                    .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();//pegar o menu
+                            Personagem personagemEscolhido = adapter.getItem(menuInfo.position);
+                            remove(personagemEscolhido);
+                        }
+                    })
+                    .setNegativeButton("Não", null)
+                    .show();
+        }
     }
 
     private void configuraLlista() {
