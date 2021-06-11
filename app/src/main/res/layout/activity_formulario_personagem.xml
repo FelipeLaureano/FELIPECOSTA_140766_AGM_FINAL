@@ -6,6 +6,7 @@
     android:orientation="vertical"
     tools:context=".ui.activities.FormularioPersonagemActivity">
 
+    //Informações de cada item(nome do item/tamanho e largura/dica do campo/tipo do campo)
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,6 +38,46 @@
             android:ems="10"
             android:hint="Nascimento"
             android:inputType="date" />
+        <EditText
+            android:id="@+id/edittext_telefone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="Telefone"
+            android:inputType="phone" />
+        <EditText
+            android:id="@+id/edittext_endereco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="Endereco"
+            android:inputType="textPostalAddress" />
+        <EditText
+            android:id="@+id/edittext_cep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="CEP"
+            android:inputType="number" />
+        <EditText
+            android:id="@+id/edittext_rg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="RG"
+            android:inputType="number" />
+        <EditText
+            android:id="@+id/edittext_genero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:hint="Gênero"
+            android:inputType="text" />
 
         <Button
             android:id="@+id/button_salvar"

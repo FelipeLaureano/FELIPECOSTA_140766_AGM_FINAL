@@ -27,6 +27,11 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
     private EditText campoNome;
     private EditText campoAltura;
     private EditText campoNascimento;
+    private EditText campoTelefone;
+    private EditText campoEndereco;
+    private EditText campoCep;
+    private EditText campoRg;
+    private EditText campoGenero;
     private final PersonagemDAO dao = new PersonagemDAO(); //criaçao da variavel com classe PersonagemDAO
     private Personagem personagem;
 
@@ -70,6 +75,11 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         campoNome.setText(personagem.getNome());
         campoAltura.setText(personagem.getAltura());
         campoNascimento.setText(personagem.getNascimento());
+        campoTelefone.setText(personagem.getTelefone());
+        campoEndereco.setText(personagem.getEndereco());
+        campoCep.setText(personagem.getCep());
+        campoRg.setText(personagem.getRg());
+        campoGenero.setText(personagem.getGenero());
     }
 
     private void configuraBotaoSalvar() {
@@ -107,6 +117,11 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         campoNome = findViewById(R.id.edittext_nome); //vincular ao campo nome
         campoAltura = findViewById(R.id.edittext_altura); //vincular ao campo altura
         campoNascimento = findViewById(R.id.edittext_nascimento); //vincular ao campo nascimento
+        campoTelefone = findViewById(R.id.edittext_telefone); //vincular ao campo telefone
+        campoEndereco = findViewById(R.id.edittext_endereco); //vincular ao campo endereco
+        campoCep = findViewById(R.id.edittext_cep); //vincular ao campo cep
+        campoRg = findViewById(R.id.edittext_rg); //vincular ao campo rg
+        campoGenero = findViewById(R.id.edittext_genero); //vincular ao campo genero
 
         SimpleMaskFormatter smfAltura = new SimpleMaskFormatter("N,NN");//variaveis de mascara para altura
         MaskTextWatcher mtwAltura = new MaskTextWatcher(campoAltura, smfAltura);
@@ -116,6 +131,18 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         MaskTextWatcher mtwNascimento = new MaskTextWatcher(campoNascimento, smfNascimento);
         campoNascimento.addTextChangedListener(mtwNascimento);
 
+        SimpleMaskFormatter smfTelefone = new SimpleMaskFormatter("(NN)NNNNN-NNNN");//variaveis de mascara para telefone
+        MaskTextWatcher mtwTelefone = new MaskTextWatcher(campoTelefone, smfTelefone);
+        campoTelefone.addTextChangedListener(mtwTelefone);
+
+        SimpleMaskFormatter smfCep = new SimpleMaskFormatter("NNNNN-NNN");//variaveis de mascara para cep
+        MaskTextWatcher mtwCep = new MaskTextWatcher(campoCep, smfCep);
+        campoCep.addTextChangedListener(mtwCep);
+
+        SimpleMaskFormatter smfRg = new SimpleMaskFormatter("NN.NNN.NNN-N");//variaveis de mascara para rg
+        MaskTextWatcher mtwRg = new MaskTextWatcher(campoRg, smfRg);
+        campoRg.addTextChangedListener(mtwRg);
+
     }
 
     private void preenchePersonagem() {
@@ -123,9 +150,19 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         String nome = campoNome.getText().toString(); // salvando dentro da variavel criada
         String altura = campoAltura.getText().toString(); // salvando dentro da variavel criada
         String nascimento = campoNascimento.getText().toString(); // salvando dentro da variavel criada
+        String telefone = campoTelefone.getText().toString(); // salvando dentro da variavel criada
+        String endereco = campoEndereco.getText().toString(); // salvando dentro da variavel criada
+        String cep = campoCep.getText().toString(); // salvando dentro da variavel criada
+        String rg = campoRg.getText().toString(); // salvando dentro da variavel criada
+        String genero = campoGenero.getText().toString(); // salvando dentro da variavel criada
 
         personagem.setNome(nome);
         personagem.setAltura(altura);
         personagem.setNascimento(nascimento);
+        personagem.setTelefone(telefone);
+        personagem.setEndereco(endereco);
+        personagem.setCep(cep);
+        personagem.setRg(rg);
+        personagem.setGenero(genero);
     }
 }

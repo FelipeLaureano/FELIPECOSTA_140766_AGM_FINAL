@@ -23,7 +23,7 @@ import static com.example.listapersonagem.ui.activities.ConstantesActivities.CHA
 
 public class ListaPersonagemActivity extends AppCompatActivity {
 
-    public static final String TITULO_APPBAR = "Lista de Personagens";
+    public static final String TITULO_APPBAR = "Agenda de Personagem";
     private final PersonagemDAO dao = new PersonagemDAO();//variável global
     private ArrayAdapter<Personagem> adapter;
 
