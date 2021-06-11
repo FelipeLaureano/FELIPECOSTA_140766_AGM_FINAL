@@ -30,7 +30,6 @@ public class Personagem implements Serializable { //classe para persistencia de 
     }
 
     public Personagem() {
-
     }
 
     //GETS SETS (alt + Insert) de cada item
